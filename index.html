@@ -33,12 +33,14 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
   <div id="progress-bar" style="background-color: rgb(33, 173, 45); height: 50px; width: 0%;"></div>
 </div>
 <p id="demo" style="font-size: 50px">loading...</p>
+<p id="demo2" style="font-size: 40px"></p>
 <p style="font-size: 20px">code from here: <a href="https://www.w3schools.com/howto/howto_js_countdown.asp">https://www.w3schools.com/howto/howto_js_countdown.asp</a></p>
 <p><a href="https://gist.github.com/dsample/f847e2cf598fd973240d">https://gist.github.com/dsample/f847e2cf598fd973240d</a></p>
 
 <script>
   // Set the date we're counting down to
   var countDownDate = new Date("Aug 7, 2024 8:30:00 PDT").getTime();
+  startDate = new Date("May 23, 2024 13:15:00 PDT").getTime();
   
   // Update the count down every 1 second
   var x = setInterval(function() {
@@ -48,6 +50,8 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
       
     // Find the distance between now and the count down date
     var distance = countDownDate - now;
+    
+    var distance2 = now - startDate;
       
     // Time calculations for days, hours, minutes and seconds
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -55,12 +59,23 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+    var days2 = Math.floor(distance2 / (1000 * 60 * 60 * 24));
+    var hours2 = Math.floor((distance2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes2 = Math.floor((distance2 % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds2 = Math.floor((distance2 % (1000 * 60)) / 1000);
+
+
     var percentComplete = getPercentage(now, countDownDate);
     document.getElementById('progress-bar').style.width = percentComplete.toString() + '%';
 
+    var percentage2 = (100  - percentage).toFixed(2);
+
     // Output the result in an element with id="demo"
     document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s "+ `(${percentage}%)`;
+    + minutes + "m " + seconds + "s "+ `(${percentage2}% left)`;
+
+    document.getElementById("demo2").innerHTML = days2 + "d " + hours2 + "h "
+    + minutes2 + "m " + seconds2 + "s "+ `(${percentage}% done)`;
       
     // If the count down is over, write some text 
     if (distance < 0) {
@@ -84,7 +99,6 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
     decimal = (totalDays-progressDays)/totalDays;
 
     percentage = (decimal * 100).toFixed(2);
-    console.log(percentage);
     return percentage;
   }
   
