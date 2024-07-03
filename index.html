@@ -3,12 +3,17 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-p,h2 {
+p,h2,button {
   text-align: center;
   margin-top: 0px;
   margin-bottom: 0px;
   font-family: 'Brush Script MT', cursive;
   filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3));
+}
+
+button
+{
+  font-size: 18px;
 }
 .overlay {
   position: fixed;
@@ -21,6 +26,64 @@ p,h2 {
   pointer-events: none;
   z-index: -1;
 }
+
+.container {
+  height: 50px;
+  position: relative;
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+#copytxt
+{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.copytxtClicked {
+  position: relative;
+  -webkit-animation: moving 1s;
+  animation: moving 1s forwards, opacity 1s ease-out forwards;
+}
+		
+@-webkit-keyframes opacity {
+    0% {opacity: 1;}
+    100% {opacity: 0;} 
+}
+
+@keyframes opacity {
+    0% {opacity: 1;}
+    100% {opacity: 0;} 
+}
+
+@-webkit-keyframes moving {
+    0% {top: 0px;}
+    75% {top: -100px;} 
+    100% {top: -100px;} 
+}
+
+@keyframes moving {
+    0% {top: 0px;}
+    75% {top: -100px;}
+    100% {top: -100px;} 
+}
+
+@media (min-width:600px) 
+ {
+    button
+    {
+        font-size: 25px; 
+    }
+ }
+
 </style>
 </head>
 <body>
@@ -34,13 +97,28 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
 </div>
 <p id="demo" style="font-size: 50px">loading...</p>
 <p id="demo2" style="font-size: 40px"></p>
+<div class="container">
+  <div class="center">
+    <button onclick="copyRounded()" style="border-radius: 12px; border: 3px solid; padding-left: 10px; padding-right: 10px;">copy rounded version</button>
+  </div>
+  <div class="center" style="pointer-events: none;">
+    <p id="copytxt" style="background-color: rgba(0, 0, 0, 0.5); color: white; font-size: 20px; padding: 10px; border-radius: 12px; margin-bottom: 50px;">text copied</p>
+  </div>
+</div>
+<p style="text-align: center; padding-bottom:2%;">ex: 99d 99h (99.9%), this is for the very 1st countdown</p>
 <p style="font-size: 20px">code from here: <a href="https://www.w3schools.com/howto/howto_js_countdown.asp">https://www.w3schools.com/howto/howto_js_countdown.asp</a></p>
 <p><a href="https://gist.github.com/dsample/f847e2cf598fd973240d">https://gist.github.com/dsample/f847e2cf598fd973240d</a></p>
+<p><a href="https://www.w3schools.com/howto/howto_css_center_button.asp">https://www.w3schools.com/howto/howto_css_center_button.asp</a></p>
+<p><a href="https://www.w3schools.com/howto/howto_js_copy_clipboard.asp">https://www.w3schools.com/howto/howto_js_copy_clipboard.asp</a></p>
+<p><a href="https://jsfiddle.net/vdb3ofmL/14/">https://jsfiddle.net/vdb3ofmL/14/</a></p>
+<p><a href="https://stackoverflow.com/questions/4847996/css-animation-onclick">https://stackoverflow.com/questions/4847996/css-animation-onclick</a></p>
 
 <script>
   // Set the date we're counting down to
   var countDownDate = new Date("Aug 7, 2024 8:30:00 PDT").getTime();
   startDate = new Date("May 23, 2024 13:15:00 PDT").getTime();
+
+  var roundedText;
   
   // Update the count down every 1 second
   var x = setInterval(function() {
@@ -64,7 +142,6 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
     var minutes2 = Math.floor((distance2 % (1000 * 60 * 60)) / (1000 * 60));
     var seconds2 = Math.floor((distance2 % (1000 * 60)) / 1000);
 
-
     var percentComplete = getPercentage(now, countDownDate);
     document.getElementById('progress-bar').style.width = percentComplete.toString() + '%';
 
@@ -72,15 +149,26 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
 
     // Output the result in an element with id="demo"
     document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s "+ `(${percentage2}% left)`;
+    + minutes + "m " + seconds + "s "+ `(${percentage}% done)`;
 
     document.getElementById("demo2").innerHTML = days2 + "d " + hours2 + "h "
-    + minutes2 + "m " + seconds2 + "s "+ `(${percentage}% done)`;
+    + minutes2 + "m " + seconds2 + "s "+ `(${percentage2}% left)`;
       
     // If the count down is over, write some text 
     if (distance < 0) {
       clearInterval(x);
-      document.getElementById("demo").innerHTML = "EXPIRED";
+      document.getElementById("demo").innerHTML = "SUMMER IS OVER!!!";
+      document.getElementById("demo2").innerHTML = "good luck...";
+    }
+
+    var percentage3 = Number(percentage).toFixed(1);
+    if(minutes >= 30)
+    {
+      roundedText = `${days}d ${hours + 1}h (${percentage3}%)`;
+    }
+    else
+    {
+      roundedText = `${days}d ${hours}h (${percentage3}%)`;
     }
   }, 1000);
 
@@ -101,7 +189,17 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
     percentage = (decimal * 100).toFixed(2);
     return percentage;
   }
-  
+
+  function copyRounded() {
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(roundedText);
+
+    const element = document.getElementById('copytxt')
+
+    element.classList.remove('copytxtClicked'); // reset animation
+    void element.offsetWidth; // trigger reflow
+    element.classList.add('copytxtClicked'); // start animation
+  } 
   </script>
 </body>
 </html>  
