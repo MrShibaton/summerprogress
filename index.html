@@ -3,6 +3,25 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+body {
+	background: linear-gradient(20deg, #ff8800, #c800ff, #f5ff2e, #00ffd5);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 p,h2,button {
   text-align: center;
   margin-top: 0px;
@@ -17,7 +36,7 @@ button
 }
 .overlay {
   position: fixed;
-  opacity: 0.25;
+  opacity: 0.75;
   top: 0;
   left: 0;
   width: 100%;
@@ -85,6 +104,10 @@ button
  }
 
 </style>
+
+<title>summer progress</title>
+<link rel="icon" href="favicon.png" type="image/icon">
+
 </head>
 <body>
 <div class="overlay"></div>
@@ -112,6 +135,7 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
 <p><a href="https://www.w3schools.com/howto/howto_js_copy_clipboard.asp">https://www.w3schools.com/howto/howto_js_copy_clipboard.asp</a></p>
 <p><a href="https://jsfiddle.net/vdb3ofmL/14/">https://jsfiddle.net/vdb3ofmL/14/</a></p>
 <p><a href="https://stackoverflow.com/questions/4847996/css-animation-onclick">https://stackoverflow.com/questions/4847996/css-animation-onclick</a></p>
+<p><a href="https://codepen.io/P1N2O/pen/pyBNzX">https://codepen.io/P1N2O/pen/pyBNzX</a></p>
 
 <script>
   // Set the date we're counting down to
@@ -170,6 +194,7 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
     {
       roundedText = `${days}d ${hours}h (${percentage3}%)`;
     }
+    document.title = `${roundedText} - summer progress`;
   }, 1000);
 
   
