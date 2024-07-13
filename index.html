@@ -3,6 +3,23 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+@font-face {
+    font-family: shibwritingregular;
+    src: url('font/shibwriting2-regular-webfont.woff2') format('woff2'),
+         url('font/shibwriting2-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: shibwritingBOLD;
+  src: url('font/shibwriting2-regular-webfont.woff2') format('woff2'),
+       url('font/shibwriting2-regular-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
 body {
 	background: linear-gradient(20deg, #ff8800, #c800ff, #f5ff2e, #00ffd5);
 	background-size: 400% 400%;
@@ -20,10 +37,11 @@ p,h2,button {
   text-align: center;
   margin-top: 0px;
   margin-bottom: 0px;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
   filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3));
 	background-size: 400% 400%;
 }
+
+p, h2, button {font-family: shibwritingregular;}
 
 button
 {
@@ -122,15 +140,15 @@ button
 </head>
 <body>
 <div class="overlay"></div>
-<h2 style="font-size: 50px; margin-top: 5%;">
+<h2 style="font-size: 60px; margin-top: 5%;">
   summer ends in:
 </h2>
 <div class="progress" style="background-color: rgb(17, 88, 65); border: 5px solid; 
 width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4px rgba(0,0,0,0.5));">
   <div id="progress-bar" style="background-color: rgb(33, 173, 45); height: 50px; width: 0%;"></div>
 </div>
-<p id="demo" style="font-size: 50px">loading...</p>
-<p id="demo2" style="font-size: 40px"></p>
+<p id="demo" style="font-size: 60px">loading...</p>
+<p id="demo2" style="font-size: 50px"></p>
 <div class="container">
   <div class="center">
     <button onclick="copyRounded()" style="border-radius: 12px; border: 3px solid; padding-left: 10px; padding-right: 10px;">copy rounded version</button>
@@ -140,7 +158,7 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
   </div>
 </div>
 <p style="text-align: center; padding-bottom:2%;">ex: 99d 99h (99.9%), this is for the very 1st countdown</p>
-<p style="font-size: 20px">code from here: <a href="https://www.w3schools.com/howto/howto_js_countdown.asp">https://www.w3schools.com/howto/howto_js_countdown.asp</a></p>
+<p style="font-size: 30px">code from here: <a href="https://www.w3schools.com/howto/howto_js_countdown.asp">https://www.w3schools.com/howto/howto_js_countdown.asp</a></p>
 <p><a href="https://gist.github.com/dsample/f847e2cf598fd973240d">https://gist.github.com/dsample/f847e2cf598fd973240d</a></p>
 <p><a href="https://www.w3schools.com/howto/howto_css_center_button.asp">https://www.w3schools.com/howto/howto_css_center_button.asp</a></p>
 <p><a href="https://www.w3schools.com/howto/howto_js_copy_clipboard.asp">https://www.w3schools.com/howto/howto_js_copy_clipboard.asp</a></p>
