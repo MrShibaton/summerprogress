@@ -147,6 +147,7 @@ button
 width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4px rgba(0,0,0,0.5));">
   <div id="progress-bar" style="background-color: rgb(33, 173, 45); height: 50px; width: 0%;"></div>
 </div>
+<br>
 <p id="demo" style="font-size: 60px">loading...</p>
 <p id="demo2" style="font-size: 50px"></p>
 <div class="container">
@@ -196,7 +197,7 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
     var seconds2 = Math.floor((distance2 % (1000 * 60)) / 1000);
 
     var percentComplete = getPercentage(now, countDownDate);
-    document.getElementById('progress-bar').style.width = percentComplete.toString() + '%';
+    document.getElementById('progress-bar').style.width = Math.min(Math.max(percentComplete, 0), 100).toString() + '%';
 
     var percentage2 = (100  - percentage).toFixed(2);
 
@@ -211,7 +212,8 @@ width: 66%; margin-left: auto; margin-right: auto; filter: drop-shadow(5px 5px 4
     if (distance < 0) {
       clearInterval(x);
       document.getElementById("demo").innerHTML = "SUMMER IS OVER!!!";
-      document.getElementById("demo2").innerHTML = "good luck...";
+      document.getElementById("demo2").innerHTML = "good luck... " + days2 + "d " + hours2 + "h "
+      + minutes2 + "m " + seconds2 + "s "+ `(${percentage2}% left)`;
     }
 
     var percentage3 = Number(percentage).toFixed(1);
